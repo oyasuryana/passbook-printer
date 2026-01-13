@@ -10,7 +10,10 @@ try {
     $nasabah_id = $_GET['idUser'];
 
     // 1. Query Data
-    $sqlUser = mysqli_query($koneksi, "SELECT * FROM `tb_user` WHERE `id` = '$nasabah_id'");
+    $sqlUser = mysqli_query($koneksi, "SELECT tb_user.username,tb_user.nama,tb_nasabah.idGrup,tb_grup.grup FROM tb_user 
+INNER JOIN tb_nasabah ON tb_nasabah.id=tb_user.id 
+INNER JOIN tb_grup  ON tb_grup.id=tb_nasabah.idGrup
+WHERE tb_user.id = '$nasabah_id'");
     $dataUser = mysqli_fetch_array($sqlUser, MYSQLI_ASSOC);
 
     if (!$dataUser) { die("Data Nasabah tidak ditemukan."); }
